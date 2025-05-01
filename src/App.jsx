@@ -3,15 +3,15 @@ import { v4 } from "uuid";
 
 function App() {
   const [list, setList] = useState([{ id: v4(), task: "iniciar" }]);
+  const [inputTask, setInputTask] = useState("");
 
   function inputMudou(event) {
-    console.log(event.target.value);
-    setList([{ id: v4(), task: event.target.value }]);
-
-    console.log(setList);
+    setInputTask(event.target.value);
   }
   function meuBotao() {
-    console.log("meuBotao");
+    setList([...list, { id: v4(), task: inputTask }]);
+
+    console.log(list);
   }
 
   return (
