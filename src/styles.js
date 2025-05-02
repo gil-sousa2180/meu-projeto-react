@@ -57,7 +57,7 @@ export const ListItem = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
-  background: #e4e4e4;
+  background: ${(props) => (props.isFinished ? "#3F4" : "#E3E3E3")};
   box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   height: 60px;

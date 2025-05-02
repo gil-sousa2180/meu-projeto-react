@@ -6,14 +6,16 @@ import { FcCheckmark, FcFullTrash } from "react-icons/fc";
 import { Container, ToDoList, Input, Button, ListItem } from "./styles";
 
 function App() {
-  const [list, setList] = useState([{ id: v4(), task: "Iniciar" }]);
+  const [list, setList] = useState([
+    { id: v4(), task: "Iniciar", finished: true },
+  ]);
   const [inputTask, setInputTask] = useState("");
 
   function inputMudou(event) {
     setInputTask(event.target.value);
   }
   function meuBotao() {
-    setList([...list, { id: v4(), task: inputTask }]);
+    setList([...list, { id: v4(), task: inputTask, finished: false }]);
 
     console.log(list);
   }
@@ -26,7 +28,7 @@ function App() {
 
         <ul>
           {list.map((item) => (
-            <ListItem>
+            <ListItem isFinished={item.finished}>
               <FcCheckmark />
               <li key={item.id}>{item.task}</li>
               <FcFullTrash />
