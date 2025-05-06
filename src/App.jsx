@@ -9,6 +9,7 @@ import {
   ListItem,
   Check,
   Trash,
+  WrapperList,
 } from "./styles.js";
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
     setInputTask(event.target.value);
   }
   function meuBotao() {
-    setList([...list, { id: v4(), task: inputTask, finished: false }]);
+    if (inputTask) {
+      setList([...list, { id: v4(), task: inputTask, finished: false }]);
+    }
   }
 
   function finalizarTarefa(id) {
@@ -41,17 +44,22 @@ function App() {
   return (
     <Container>
       <ToDoList>
+        <h1>Lista de Tarefas</h1>
         <Input onChange={inputMudou} placeholder="Digite aqui..." />
         <Button onClick={meuBotao}>Adicionar</Button>
 
         <ul>
-          {list.map((item) => (
-            <ListItem isFinished={item.finished} key={item.id}>
-              <Check onClick={() => finalizarTarefa(item.id)} />
-              <li>{item.task}</li>
-              <Trash onClick={() => excluirTarefa(item.id)} />
-            </ListItem>
-          ))}
+          {list.length > 0 ? (
+            list.map((item) => (
+              <ListItem isFinished={item.finished} key={item.id}>
+                <Check onClick={() => finalizarTarefa(item.id)} />
+                <li>{item.task}</li>
+                <Trash onClick={() => excluirTarefa(item.id)} />
+              </ListItem>
+            ))
+          ) : (
+            <h2>Não exitem itens nesta lista</h2>
+          )}
         </ul>
       </ToDoList>
     </Container>
