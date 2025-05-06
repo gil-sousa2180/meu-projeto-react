@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
 
-import { FcCheckmark, FcFullTrash } from "react-icons/fc";
-
-import { Container, ToDoList, Input, Button, ListItem } from "./styles";
+import {
+  Container,
+  ToDoList,
+  Input,
+  Button,
+  ListItem,
+  Check,
+  Trash,
+} from "./styles.js";
 
 function App() {
   const [list, setList] = useState([
@@ -16,8 +22,20 @@ function App() {
   }
   function meuBotao() {
     setList([...list, { id: v4(), task: inputTask, finished: false }]);
+  }
 
-    console.log(list);
+  function finalizarTarefa(id) {
+    const newList = list.map((item) =>
+      item.id === id ? { ...item, finished: !item.finished } : item
+    );
+
+    setList(newList);
+  }
+
+  function excluirTarefa(id) {
+    const newList = list.filter((item) => item.id !== id);
+
+    setList(newList);
   }
 
   return (
@@ -28,10 +46,10 @@ function App() {
 
         <ul>
           {list.map((item) => (
-            <ListItem isFinished={item.finished}>
-              <FcCheckmark />
-              <li key={item.id}>{item.task}</li>
-              <FcFullTrash />
+            <ListItem isFinished={item.finished} key={item.id}>
+              <Check onClick={() => finalizarTarefa(item.id)} />
+              <li>{item.task}</li>
+              <Trash onClick={() => excluirTarefa(item.id)} />
             </ListItem>
           ))}
         </ul>
