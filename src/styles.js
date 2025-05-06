@@ -17,9 +17,27 @@ export const ToDoList = styled.div`
   padding: 30px 20px;
   border-radius: 4px;
 
+  h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
   ul {
     padding: 0;
     margin-top: 40px;
+  }
+
+  h2 {
+    text-align: center;
+    color: rgb(172, 170, 170);
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      color: rgb(15, 15, 15);
+      transform: scale(1);
+    }
   }
 `;
 
@@ -37,7 +55,7 @@ export const Button = styled.button`
   background: #12dfdf;
   height: 35px;
   border: none;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 2px;
   color: #fff;
